@@ -1,0 +1,8 @@
+streamlit
+pandas
+numpy
+plotly
+scikit-learn
+shap==0.44.0
+xlsxwriter
+joblib
