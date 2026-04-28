@@ -1,4 +1,4 @@
-# 💼 FinRisk AI – Credit Intelligence System
+#  FinRisk AI – Credit Intelligence System
 
 An end-to-end **production-style credit risk prediction platform** built using Machine Learning, Explainable AI (SHAP), and an interactive dashboard.
 
@@ -6,13 +6,13 @@ This system simulates how modern banks and fintech companies evaluate loan appli
 
 ---
 
-## 🚀 Live Demo
+##  Live Demo
 
-👉 *(Add your deployed Streamlit link here)*
+👉 *Link*
 
 ---
 
-## 🎯 Project Overview
+##  Project Overview
 
 FinRisk AI predicts the **probability of loan default**, generates a **credit score (300–900)**, and provides **clear explanations** behind each decision using SHAP.
 
@@ -24,7 +24,7 @@ Unlike basic ML projects, this system focuses on:
 
 ---
 
-## 🌟 Key Features
+##  Key Features
 
 ### 🔹 Core ML Capabilities
 
@@ -60,7 +60,7 @@ Unlike basic ML projects, this system focuses on:
 
 ---
 
-## 🏗️ Project Architecture
+##  Project Architecture
 
 ```
 finrisk-ai/
@@ -102,7 +102,7 @@ finrisk-ai/
 
 ---
 
-## 📊 Explainability (Why Prediction?)
+##  Explainability (Why Prediction?)
 
 The system uses **SHAP (SHapley Additive Explanations)** to:
 
@@ -112,7 +112,7 @@ The system uses **SHAP (SHapley Additive Explanations)** to:
 
 ---
 
-## 📈 Example Dashboard Features
+##  Example Dashboard Features
 
 * Default probability visualization
 * Credit score calculation
@@ -123,7 +123,7 @@ The system uses **SHAP (SHapley Additive Explanations)** to:
 
 ---
 
-## 🛠️ Tech Stack
+##  Tech Stack
 
 * Python
 * Scikit-learn
@@ -135,7 +135,7 @@ The system uses **SHAP (SHapley Additive Explanations)** to:
 
 ---
 
-## ⚙️ Installation & Setup
+##  Installation & Setup
 
 ### 1. Clone Repository
 
@@ -170,7 +170,7 @@ http://localhost:8501
 
 ---
 
-## 📋 How It Works
+##  How It Works
 
 1. User enters financial details
 2. Data is preprocessed (scaling + encoding)
@@ -189,7 +189,7 @@ http://localhost:8501
 
 ---
 
-## 🚀 Future Improvements
+##  Future Improvements
 
 * FastAPI backend (production API)
 * Docker deployment
@@ -199,7 +199,7 @@ http://localhost:8501
 
 ---
 
-## 🧠 Key Learnings
+##  Key Learnings
 
 * End-to-end ML system design
 * Explainable AI implementation
@@ -212,8 +212,8 @@ http://localhost:8501
 
 **Bandi Jaswanth Reddy**
 
-* GitHub: *(add your link)*
-* LinkedIn: *(add your link)*
+* GitHub: **
+* LinkedIn: **
 
 ---
 
