@@ -395,5 +395,8 @@ Inspired by real fintech and banking systems.
 
 ## Author
 
-Jaswanth Reddy
-BTech – Artificial Intelligence and Data Science
+**Jaswanth Reddy Bandi**  
+<p>
+  <a href="https://www.linkedin.com/in/your-linkedin-id" target="_blank">LinkedIn</a> |
+  <a href="https://github.com/jaswanthhreddy" target="_blank">GitHub</a>
+</p>
