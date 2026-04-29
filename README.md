@@ -108,7 +108,7 @@ It bridges academic ML and real fintech systems.
 Add here:
 
 ```md
-![Architecture](./assets/architecture_.png)
+![Architecture](./assets/architecture.png)
 ```
 
 ---
