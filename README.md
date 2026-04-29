@@ -105,11 +105,10 @@ It bridges academic ML and real fintech systems.
 
 ## Architecture Diagram
 
-Add here:
+<p align="center">
+  <img src="./assets/architecture.png" width="90%">
+</p>
 
-```md
-![Architecture](./assets/architecture.png)
-```
 
 ---
 
