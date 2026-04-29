@@ -1,22 +1,9 @@
-<<<<<<< HEAD
-#  FinRisk AI – Credit Intelligence System
-=======
 # FinRisk AI – Credit Intelligence System
->>>>>>> 14813d9 (Updated README)
 
 ### End-to-End Credit Risk Assessment, Simulation and Decision Platform
 
 ---
 
-<<<<<<< HEAD
-##  Live Demo
-
-👉 *Link*
-
----
-
-##  Project Overview
-=======
 ![Python](https://img.shields.io/badge/Python-3.9-blue)
 ![Streamlit](https://img.shields.io/badge/Streamlit-App-red)
 ![ML](https://img.shields.io/badge/MachineLearning-Enabled-green)
@@ -26,41 +13,26 @@
 ---
 
 ## Live Demo
->>>>>>> 14813d9 (Updated README)
 
 Access the deployed application:
 https://finrisk-intelligence.streamlit.app
 
 ---
 
-<<<<<<< HEAD
-##  Key Features
-=======
 ## Support the Project
->>>>>>> 14813d9 (Updated README)
 
 If you find this project useful, consider giving it a star.
-It helps improve visibility and supports further development.
 
 ---
 
 ## Project Preview
 
-### Dashboard
+Add screenshots here:
 
-*Add screenshot here (assets/dashboard.png)*
-
-### Risk Analysis
-
-*Add screenshot here (assets/risk.png)*
-
-### Simulator
-
-*Add screenshot here (assets/simulator.png)*
-
-### Excel Report
-
-*Add screenshot here (assets/report.png)*
+* Dashboard
+* Risk Analysis
+* Simulator
+* Excel Report
 
 ---
 
@@ -81,7 +53,8 @@ It helps improve visibility and supports further development.
 * Dashboard
 * Report Generation
 * Key Outputs
-* Use Cases
+* Model Performance
+* Explainability
 * Tech Stack
 * Project Structure
 * Installation
@@ -90,8 +63,6 @@ It helps improve visibility and supports further development.
 * Performance
 * Limitations
 * Future Improvements
-* Contributing
-* License
 * Acknowledgment
 * Author
 
@@ -99,15 +70,12 @@ It helps improve visibility and supports further development.
 
 ## Overview
 
-FinRisk AI is a production-inspired credit risk intelligence system that replicates how banks and fintech platforms evaluate loan applicants using machine learning, financial metrics, and decision rules.
+FinRisk AI is a production-inspired credit risk intelligence system that simulates how banks and fintech platforms evaluate loan applicants using machine learning, financial metrics, and decision rules.
 
-It provides real-time risk prediction, explainability, simulation capabilities, and bank-level reporting.
+It provides real-time prediction, explainability, simulation, and professional reporting.
 
 ---
 
-<<<<<<< HEAD
-##  Project Architecture
-=======
 ## Why This Project Matters
 
 This project demonstrates:
@@ -115,10 +83,10 @@ This project demonstrates:
 * Real-world credit risk modeling
 * End-to-end system design
 * Financial domain understanding
-* Explainable AI implementation
-* Production-style dashboard development
+* Explainable AI
+* Production-grade dashboard
 
-It bridges the gap between academic ML projects and real fintech systems.
+It bridges academic ML and real fintech systems.
 
 ---
 
@@ -130,16 +98,14 @@ It bridges the gap between academic ML projects and real fintech systems.
 * Explainable AI (Feature Importance)
 * Scenario Simulation (What-if analysis)
 * Loan Optimization Engine
-* Interactive Dashboard (Power BI style)
+* Power BI-style Interactive Dashboard
 * Bank-level Excel Report Generation
 
 ---
 
 ## Architecture Diagram
 
-*Add architecture diagram here*
-
-Example:
+Add here:
 
 ```md
 ![Architecture](./assets/architecture.png)
@@ -151,19 +117,17 @@ Example:
 
 User Input → Feature Engineering → ML Model → Decision Engine → Dashboard → Report
 
-The system is modular and follows a pipeline similar to real banking systems.
-
 ---
 
 ## How It Works
 
-1. User enters applicant data
-2. System validates and processes inputs
-3. Feature engineering computes financial metrics
-4. Machine learning model predicts default probability
+1. User inputs applicant data
+2. System processes and validates inputs
+3. Feature engineering computes financial indicators
+4. ML model predicts default probability
 5. Decision engine applies business rules
-6. Dashboard displays insights and charts
-7. Excel report is generated for download
+6. Dashboard displays insights
+7. Excel report is generated
 
 ---
 
@@ -182,31 +146,29 @@ The system is modular and follows a pipeline similar to real banking systems.
 
 ### Behavioral
 
-* Average DPD (Days Past Due)
+* Average DPD
 * Delinquency Ratio
 * Credit Utilization
 * Number of Open Accounts
 
 ### Loan Context
 
-* Loan Type (Secured / Unsecured)
+* Loan Type
 * Loan Purpose
 
-These features are selected based on real-world credit risk indicators used in banking systems.
+These reflect real-world banking risk signals.
 
 ---
 
 ## Feature Engineering
 
-Derived metrics include:
+Derived features:
 
 * Loan-to-Income Ratio
 * EMI Calculation
 * EMI Burden
 * Debt-to-Income Ratio
 * Risk Flags
-
-These features improve predictive performance and reflect financial behavior.
 
 ---
 
@@ -218,7 +180,7 @@ Reasons:
 
 * Interpretable
 * Fast
-* Industry-standard baseline
+* Industry baseline
 
 Outputs:
 
@@ -230,50 +192,47 @@ Outputs:
 
 ## Decision Engine
 
-Rules applied:
-
 * Probability < 0.3 → Approve
 * 0.3–0.6 → Review
 * > 0.6 → Reject
 
-Additional constraints:
+Additional logic:
 
-* High EMI burden → increased risk
-* High delinquency → stricter decision
+* High EMI burden increases risk
+* High delinquency penalizes approval
 
 ---
 
 ## Scenario Simulator
 
-Users can modify:
+Users can adjust:
 
 * Income
-* Loan amount
+* Loan Amount
 * Tenure
 
-The system recalculates risk in real time to simulate different scenarios.
+Risk recalculates instantly.
 
 ---
 
 ## Optimization Engine
 
-Finds optimal loan configuration by:
+Optimizes:
 
-* Adjusting loan amount
-* Modifying tenure
-* Minimizing risk probability
+* Loan Amount
+* Tenure
+* Risk Score
 
 ---
 
 ## Dashboard
 
-* KPI Cards (Risk, Score, LTI)
-* Gauge Chart (Risk %)
+* KPI Cards
+* Risk Gauge
 * Feature Importance Chart
-* Filters and Tabs
-* Drill-down analytics
-
-Designed to mimic modern fintech dashboards.
+* Filters
+* Tabs
+* Drill-down Analytics
 
 ---
 
@@ -281,39 +240,50 @@ Designed to mimic modern fintech dashboards.
 
 Excel report includes:
 
-### Summary Sheet
+### Summary
 
-* Risk Probability
-* Credit Score
+* Probability
+* Score
 * Decision
 
-### Inputs Sheet
+### Inputs
 
-* All applicant data
+* Full applicant data
 
-### Importance Sheet
+### Importance
 
-* Feature importance with visualization
-
-Reports are formatted to resemble bank-level documentation.
+* Feature importance with chart
 
 ---
 
 ## Key Outputs
 
-* Default Probability: Example ~66%
-* Credit Score: Example ~500
+* Default Probability: ~66%
+* Credit Score: ~500
 * Risk Category: Medium Risk
-* Loan-to-Income Ratio: Example ~2.13
+* Loan-to-Income Ratio: ~2.13
 
 ---
 
-## Use Cases
+## Model Performance
 
-* Banks and NBFCs
-* Fintech lending platforms
-* Credit risk analysts
-* Loan underwriting systems
+| Model               | Accuracy | Recall |
+| ------------------- | -------- | ------ |
+| Logistic Regression | 93%      | 94%    |
+| Random Forest       | 91%      | 90%    |
+| XGBoost             | 92%      | 91%    |
+
+Logistic Regression chosen for interpretability and recall.
+
+---
+
+## Explainability
+
+Uses SHAP:
+
+* Identifies key drivers
+* Explains predictions
+* Supports transparency
 
 ---
 
@@ -327,11 +297,11 @@ Backend:
 
 * Python
 
-Machine Learning:
+ML:
 
 * Scikit-learn
 
-Data Processing:
+Data:
 
 * Pandas, NumPy
 
@@ -346,19 +316,12 @@ Reporting:
 ---
 
 ## Project Structure
->>>>>>> 14813d9 (Updated README)
 
 ```
 finrisk-ai/
-│
 ├── app/
 │   └── app.py
 ├── assets/
-│   ├── architecture.png
-│   ├── dashboard.png
-│   ├── simulator.png
-│   ├── report.png
-│
 ├── models/
 ├── reports/
 ├── requirements.txt
@@ -367,64 +330,10 @@ finrisk-ai/
 
 ---
 
-<<<<<<< HEAD
-## 📊 Model Performance
-
-| Model               | Accuracy | Recall  |
-| ------------------- | -------- | ------- |
-| Logistic Regression | **93%**  | **94%** |
-| Random Forest       | ~91%     | ~90%    |
-| XGBoost             | ~92%     | ~91%    |
-
-👉 Logistic Regression chosen for:
-
-* High recall (important in finance)
-* Interpretability (regulatory requirement)
-
----
-
-##  Explainability (Why Prediction?)
-
-The system uses **SHAP (SHapley Additive Explanations)** to:
-
-* Identify top influencing features
-* Visualize contribution of each feature
-* Explain individual predictions clearly
-
----
-
-##  Example Dashboard Features
-
-* Default probability visualization
-* Credit score calculation
-* Risk gauge (green → yellow → red)
-* Feature importance chart
-* SHAP waterfall plot
-* Decision explanation panel
-
----
-
-##  Tech Stack
-
-* Python
-* Scikit-learn
-* Pandas / NumPy
-* SHAP (Explainable AI)
-* Plotly (visualizations)
-* Streamlit (UI)
-* Joblib (model serialization)
-
----
-
-##  Installation & Setup
-
-### 1. Clone Repository
-=======
 ## Installation
->>>>>>> 14813d9 (Updated README)
 
 ```bash
-git clone https://github.com/your-username/finrisk-ai.git
+git clone https://github.com/jaswanthreddy/finrisk-ai.git
 cd finrisk-ai
 pip install -r requirements.txt
 streamlit run app/app.py
@@ -435,26 +344,20 @@ streamlit run app/app.py
 ## Usage
 
 1. Enter applicant details
-2. Click "Analyze Applicant"
-3. View risk metrics and charts
-4. Use simulator for scenario analysis
-5. Download Excel report
+2. Click Analyze
+3. View insights
+4. Run simulation
+5. Download report
 
 ---
 
-<<<<<<< HEAD
-##  How It Works
-=======
 ## Deployment
->>>>>>> 14813d9 (Updated README)
 
-Deployed using Streamlit Cloud
+Using Streamlit Cloud:
 
-Steps:
-
-1. Push code to GitHub
-2. Connect repository to Streamlit
-3. Set main file path (app/app.py)
+1. Push to GitHub
+2. Connect repo
+3. Set `app/app.py`
 4. Deploy
 
 ---
@@ -463,52 +366,31 @@ Steps:
 
 * Fast inference (<100ms)
 * Real-time updates
-* Lightweight architecture
+* Lightweight
 
 ---
 
-<<<<<<< HEAD
-##  Future Improvements
-=======
 ## Limitations
->>>>>>> 14813d9 (Updated README)
 
 * No real credit bureau data
 * Simplified assumptions
-* Interest rate partially modeled
+* Partial interest modeling
 
 ---
 
-<<<<<<< HEAD
-##  Key Learnings
-=======
 ## Future Improvements
->>>>>>> 14813d9 (Updated README)
 
-* Real dataset integration
-* Advanced ML models (XGBoost, Deep Learning)
-* Interest rate optimization
-* API-based architecture
-* User authentication system
-
----
-
-## License
-
-<<<<<<< HEAD
-**Bandi Jaswanth Reddy**
-
-* GitHub: **
-* LinkedIn: **
-=======
-This project is intended for educational and demonstration purposes.
->>>>>>> 14813d9 (Updated README)
+* Real datasets
+* Advanced ML models
+* Interest rate modeling
+* API backend
+* Authentication
 
 ---
 
 ## Acknowledgment
 
-Inspired by real-world fintech systems and credit risk modeling practices.
+Inspired by real fintech and banking systems.
 
 ---
 
@@ -516,5 +398,3 @@ Inspired by real-world fintech systems and credit risk modeling practices.
 
 Jaswanth Reddy
 BTech – Artificial Intelligence and Data Science
-
----
