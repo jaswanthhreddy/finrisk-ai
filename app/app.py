@@ -34,7 +34,7 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-# ---------------- NAVBAR ---------------- #
+# ---------------- NAVBAR (UPDATED ONLY) ---------------- #
 col1, col2, col3, col4, col5 = st.columns([2,1,1,1,1])
 
 if "page" not in st.session_state:
@@ -56,7 +56,7 @@ with col4:
     if st.button("Simulator"):
         nav("Simulator")
 with col5:
-    if st.button("Data Guide"):
+    if st.button("Data Guide"):   # 
         nav("Guide")
 
 page = st.session_state.page
@@ -64,75 +64,60 @@ page = st.session_state.page
 # ---------------- SIDEBAR ---------------- #
 st.sidebar.header("Applicant Details")
 
-age = st.sidebar.number_input('Age ℹ',18,100,28,help="Applicant age")
-income = st.sidebar.number_input('Income ℹ',0,10000000,1200000,help="Annual income")
-loan_amount = st.sidebar.number_input('Loan Amount ℹ',0,10000000,2560000,help="Loan amount")
-loan_tenure = st.sidebar.number_input('Loan Tenure ℹ',1,120,36,help="Months")
-dpd = st.sidebar.number_input('Avg DPD ℹ',0,100,20)
-delinq = st.sidebar.number_input('Delinquency % ℹ',0,100,30)
-util = st.sidebar.number_input('Utilization % ℹ',0,100,30)
-accounts = st.sidebar.number_input('Accounts ℹ',1,10,2)
+age = st.sidebar.number_input(
+    'Age ℹ',18,100,28,
+    help="Applicant's age. Middle age is generally considered financially stable."
+)
 
-residence = st.sidebar.selectbox('Residence ℹ',['Owned','Rented','Mortgage'])
-purpose = st.sidebar.selectbox('Purpose ℹ',['Education','Home','Auto','Personal'])
-loan_type = st.sidebar.selectbox('Loan Type ℹ',['Unsecured','Secured'])
+income = st.sidebar.number_input(
+    'Income ℹ',0,10000000,1200000,
+    help="Annual income. Higher income improves repayment ability."
+)
 
-# =====================================================
-# 🔥 NEW ADDITIONS (SAFE BLOCK)
-# =====================================================
+loan_amount = st.sidebar.number_input(
+    'Loan Amount ℹ',0,10000000,2560000,
+    help="Total loan requested. Higher loan = higher risk."
+)
 
-risk_flags = []
+loan_tenure = st.sidebar.number_input(
+    'Loan Tenure ℹ',1,120,36,
+    help="Loan duration in months. Longer tenure lowers EMI but increases total exposure."
+)
 
-if util > 70:
-    risk_flags.append("High Utilization ⚠")
-if delinq > 40:
-    risk_flags.append("High Delinquency ⚠")
-if dpd > 30:
-    risk_flags.append("Late Payments ⚠")
-if loan_amount > income * 3:
-    risk_flags.append("Loan too high ⚠")
-if accounts <= 1:
-    risk_flags.append("Low credit history ⚠")
+dpd = st.sidebar.number_input(
+    'Avg DPD ℹ',0,100,20,
+    help="Average days past due. Higher values indicate delayed payments."
+)
 
-if risk_flags:
-    for f in risk_flags:
-        st.sidebar.warning(f)
-else:
-    st.sidebar.success("Profile stable")
+delinq = st.sidebar.number_input(
+    'Delinquency % ℹ',0,100,30,
+    help="Percentage of missed payments. High value = risky borrower."
+)
 
-def color_metric(val, low, high):
-    return "🟢" if val < low else "🟡" if val < high else "🔴"
+util = st.sidebar.number_input(
+    'Utilization % ℹ',0,100,30,
+    help="Credit usage ratio. High utilization signals financial stress."
+)
 
-st.sidebar.markdown(f"Utilization: {color_metric(util,40,70)}")
-st.sidebar.markdown(f"Delinquency: {color_metric(delinq,20,40)}")
-st.sidebar.markdown(f"DPD: {color_metric(dpd,15,30)}")
+accounts = st.sidebar.number_input(
+    'Accounts ℹ',1,10,2,
+    help="Number of active credit accounts."
+)
 
-st.sidebar.markdown("### EMI Calculator")
+residence = st.sidebar.selectbox(
+    'Residence ℹ',['Owned','Rented','Mortgage'],
+    help="Owned homes indicate financial stability."
+)
 
-interest_rate = st.sidebar.slider("Interest Rate (%)",5.0,20.0,10.0)
-r = interest_rate / 12 / 100
+purpose = st.sidebar.selectbox(
+    'Purpose ℹ',['Education','Home','Auto','Personal'],
+    help="Loan purpose affects risk profile."
+)
 
-emi = (loan_amount*r*(1+r)**loan_tenure)/((1+r)**loan_tenure-1) if r>0 else loan_amount/loan_tenure
-st.sidebar.metric("EMI",f"₹ {int(emi):,}")
-
-monthly_income = income/12 if income>0 else 1
-ratio = emi/monthly_income
-
-if ratio>0.5:
-    st.sidebar.error("High EMI burden")
-elif ratio>0.3:
-    st.sidebar.warning("Moderate EMI")
-else:
-    st.sidebar.success("EMI manageable")
-
-score_health = 100
-if util>70: score_health-=20
-if delinq>40: score_health-=20
-if dpd>30: score_health-=15
-if ratio>0.5: score_health-=25
-
-st.sidebar.metric("Health Score",f"{score_health}/100")
-
+loan_type = st.sidebar.selectbox(
+    'Loan Type ℹ',['Unsecured','Secured'],
+    help="Secured loans are less risky than unsecured loans."
+)
 # ---------------- CHART THEME ---------------- #
 def apply_dark_chart(fig):
     fig.update_layout(
@@ -143,7 +128,6 @@ def apply_dark_chart(fig):
     )
     return fig
 
-
 # =====================================================
 # DASHBOARD
 # =====================================================
@@ -151,108 +135,24 @@ if page == "Dashboard":
 
     st.markdown("## Overview")
 
-    # ---------------- KPI ROW ---------------- #
-    k1, k2, k3 = st.columns(3)
+    c1,c2,c3 = st.columns(3)
 
-    with k1:
-        st.markdown("""
-        <div class='kpi'>
-        📊 <b>Applications</b>
-        <h2>1248</h2>
-        </div>
-        """, unsafe_allow_html=True)
+    c1.markdown("<div class='kpi'><h4>Applications</h4><h2>1248</h2></div>",unsafe_allow_html=True)
+    c2.markdown("<div class='kpi'><h4>Approval Rate</h4><h2>68%</h2></div>",unsafe_allow_html=True)
+    c3.markdown("<div class='kpi'><h4>Defaults</h4><h2>2.8%</h2></div>",unsafe_allow_html=True)
 
-    with k2:
-        st.markdown("""
-        <div class='kpi'>
-        ✅ <b>Approval Rate</b>
-        <h2>68%</h2>
-        </div>
-        """, unsafe_allow_html=True)
-
-    with k3:
-        st.markdown("""
-        <div class='kpi'>
-        ⚠ <b>Defaults</b>
-        <h2>2.8%</h2>
-        </div>
-        """, unsafe_allow_html=True)
-
-    # ---------------- MAIN GRID ---------------- #
-    col_left, col_right = st.columns([3,1])
-
-    # -------- LEFT: MAIN TREND -------- #
-    with col_left:
-        st.markdown("<div class='section'>", unsafe_allow_html=True)
-        st.subheader("Trend Analysis")
-
-        df = pd.DataFrame({
-            "Month":["Jan","Feb","Mar","Apr","May"],
-            "Approvals":[50,60,70,65,80],
-            "Defaults":[5,10,8,12,9]
-        })
-
-        fig = go.Figure()
-        fig.add_trace(go.Scatter(
-            x=df["Month"], y=df["Approvals"],
-            mode='lines+markers',
-            line=dict(color="#22C55E", width=3),
-            name="Approvals"
-        ))
-
-        fig.add_trace(go.Scatter(
-            x=df["Month"], y=df["Defaults"],
-            mode='lines+markers',
-            line=dict(color="#EF4444", width=3),
-            name="Defaults"
-        ))
-
-        fig.update_layout(
-            legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1)
-        )
-
-        st.plotly_chart(apply_dark_chart(fig), use_container_width=True)
-
-        st.markdown("</div>", unsafe_allow_html=True)
-
-    # -------- RIGHT: INSIGHTS PANEL -------- #
-    with col_right:
-        st.markdown("<div class='section'>", unsafe_allow_html=True)
-        st.subheader("Insights")
-
-        st.success("Approval rate improving steadily")
-        st.warning("Defaults slightly increased in April")
-        st.info("Overall portfolio performance stable")
-
-        st.markdown("---")
-        st.subheader("Quick Metrics")
-
-        st.metric("Portfolio Risk", "Medium")
-        st.metric("Growth", "+12%")
-        st.metric("Stability", "Good")
-
-        st.markdown("</div>", unsafe_allow_html=True)
-
-    # ---------------- SECOND ROW ---------------- #
-    st.markdown("<div class='section'>", unsafe_allow_html=True)
-    st.subheader("Portfolio Distribution")
-
-    dist_data = pd.DataFrame({
-        "Category":["Low Risk","Medium Risk","High Risk"],
-        "Count":[520,480,248]
+    df = pd.DataFrame({
+        "Month":["Jan","Feb","Mar","Apr","May"],
+        "Approvals":[50,60,70,65,80],
+        "Defaults":[5,10,8,12,9]
     })
 
-    fig2 = px.pie(
-        dist_data,
-        names="Category",
-        values="Count",
-        hole=0.5,
-        color_discrete_sequence=["#22C55E","#FACC15","#EF4444"]
-    )
+    fig = go.Figure()
+    fig.add_trace(go.Scatter(x=df["Month"], y=df["Approvals"], mode='lines+markers', line=dict(color="#22C55E")))
+    fig.add_trace(go.Scatter(x=df["Month"], y=df["Defaults"], mode='lines+markers', line=dict(color="#EF4444")))
 
-    st.plotly_chart(apply_dark_chart(fig2), use_container_width=True)
+    st.plotly_chart(apply_dark_chart(fig), use_container_width=True)
 
-    st.markdown("</div>", unsafe_allow_html=True)
 # =====================================================
 # RISK ENGINE
 # =====================================================
