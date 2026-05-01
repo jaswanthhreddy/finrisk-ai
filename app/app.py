@@ -34,7 +34,7 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-# ---------------- NAVBAR (UPDATED ONLY) ---------------- #
+# ---------------- NAVBAR ---------------- #
 col1, col2, col3, col4, col5 = st.columns([2,1,1,1,1])
 
 if "page" not in st.session_state:
@@ -56,7 +56,7 @@ with col4:
     if st.button("Simulator"):
         nav("Simulator")
 with col5:
-    if st.button("Data Guide"):   # 
+    if st.button("Data Guide"):
         nav("Guide")
 
 page = st.session_state.page
@@ -64,60 +64,75 @@ page = st.session_state.page
 # ---------------- SIDEBAR ---------------- #
 st.sidebar.header("Applicant Details")
 
-age = st.sidebar.number_input(
-    'Age ℹ',18,100,28,
-    help="Applicant's age. Middle age is generally considered financially stable."
-)
+age = st.sidebar.number_input('Age ℹ',18,100,28,help="Applicant age")
+income = st.sidebar.number_input('Income ℹ',0,10000000,1200000,help="Annual income")
+loan_amount = st.sidebar.number_input('Loan Amount ℹ',0,10000000,2560000,help="Loan amount")
+loan_tenure = st.sidebar.number_input('Loan Tenure ℹ',1,120,36,help="Months")
+dpd = st.sidebar.number_input('Avg DPD ℹ',0,100,20)
+delinq = st.sidebar.number_input('Delinquency % ℹ',0,100,30)
+util = st.sidebar.number_input('Utilization % ℹ',0,100,30)
+accounts = st.sidebar.number_input('Accounts ℹ',1,10,2)
 
-income = st.sidebar.number_input(
-    'Income ℹ',0,10000000,1200000,
-    help="Annual income. Higher income improves repayment ability."
-)
+residence = st.sidebar.selectbox('Residence ℹ',['Owned','Rented','Mortgage'])
+purpose = st.sidebar.selectbox('Purpose ℹ',['Education','Home','Auto','Personal'])
+loan_type = st.sidebar.selectbox('Loan Type ℹ',['Unsecured','Secured'])
 
-loan_amount = st.sidebar.number_input(
-    'Loan Amount ℹ',0,10000000,2560000,
-    help="Total loan requested. Higher loan = higher risk."
-)
+# =====================================================
+# 🔥 NEW ADDITIONS (SAFE BLOCK)
+# =====================================================
 
-loan_tenure = st.sidebar.number_input(
-    'Loan Tenure ℹ',1,120,36,
-    help="Loan duration in months. Longer tenure lowers EMI but increases total exposure."
-)
+risk_flags = []
 
-dpd = st.sidebar.number_input(
-    'Avg DPD ℹ',0,100,20,
-    help="Average days past due. Higher values indicate delayed payments."
-)
+if util > 70:
+    risk_flags.append("High Utilization ⚠")
+if delinq > 40:
+    risk_flags.append("High Delinquency ⚠")
+if dpd > 30:
+    risk_flags.append("Late Payments ⚠")
+if loan_amount > income * 3:
+    risk_flags.append("Loan too high ⚠")
+if accounts <= 1:
+    risk_flags.append("Low credit history ⚠")
 
-delinq = st.sidebar.number_input(
-    'Delinquency % ℹ',0,100,30,
-    help="Percentage of missed payments. High value = risky borrower."
-)
+if risk_flags:
+    for f in risk_flags:
+        st.sidebar.warning(f)
+else:
+    st.sidebar.success("Profile stable")
 
-util = st.sidebar.number_input(
-    'Utilization % ℹ',0,100,30,
-    help="Credit usage ratio. High utilization signals financial stress."
-)
+def color_metric(val, low, high):
+    return "🟢" if val < low else "🟡" if val < high else "🔴"
 
-accounts = st.sidebar.number_input(
-    'Accounts ℹ',1,10,2,
-    help="Number of active credit accounts."
-)
+st.sidebar.markdown(f"Utilization: {color_metric(util,40,70)}")
+st.sidebar.markdown(f"Delinquency: {color_metric(delinq,20,40)}")
+st.sidebar.markdown(f"DPD: {color_metric(dpd,15,30)}")
 
-residence = st.sidebar.selectbox(
-    'Residence ℹ',['Owned','Rented','Mortgage'],
-    help="Owned homes indicate financial stability."
-)
+st.sidebar.markdown("### EMI Calculator")
 
-purpose = st.sidebar.selectbox(
-    'Purpose ℹ',['Education','Home','Auto','Personal'],
-    help="Loan purpose affects risk profile."
-)
+interest_rate = st.sidebar.slider("Interest Rate (%)",5.0,20.0,10.0)
+r = interest_rate / 12 / 100
 
-loan_type = st.sidebar.selectbox(
-    'Loan Type ℹ',['Unsecured','Secured'],
-    help="Secured loans are less risky than unsecured loans."
-)
+emi = (loan_amount*r*(1+r)**loan_tenure)/((1+r)**loan_tenure-1) if r>0 else loan_amount/loan_tenure
+st.sidebar.metric("EMI",f"₹ {int(emi):,}")
+
+monthly_income = income/12 if income>0 else 1
+ratio = emi/monthly_income
+
+if ratio>0.5:
+    st.sidebar.error("High EMI burden")
+elif ratio>0.3:
+    st.sidebar.warning("Moderate EMI")
+else:
+    st.sidebar.success("EMI manageable")
+
+score_health = 100
+if util>70: score_health-=20
+if delinq>40: score_health-=20
+if dpd>30: score_health-=15
+if ratio>0.5: score_health-=25
+
+st.sidebar.metric("Health Score",f"{score_health}/100")
+
 # ---------------- CHART THEME ---------------- #
 def apply_dark_chart(fig):
     fig.update_layout(
