@@ -34,8 +34,8 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-# ---------------- NAVBAR ---------------- #
-col1, col2, col3, col4 = st.columns([2,1,1,1])
+# ---------------- NAVBAR (UPDATED ONLY) ---------------- #
+col1, col2, col3, col4, col5 = st.columns([2,1,1,1,1])
 
 if "page" not in st.session_state:
     st.session_state.page = "Dashboard"
@@ -55,25 +55,69 @@ with col3:
 with col4:
     if st.button("Simulator"):
         nav("Simulator")
+with col5:
+    if st.button("Data Guide"):   # 
+        nav("Guide")
 
 page = st.session_state.page
 
 # ---------------- SIDEBAR ---------------- #
 st.sidebar.header("Applicant Details")
 
-age = st.sidebar.number_input('Age',18,100,28)
-income = st.sidebar.number_input('Income',0,10000000,1200000)
-loan_amount = st.sidebar.number_input('Loan Amount',0,10000000,2560000)
-loan_tenure = st.sidebar.number_input('Loan Tenure',1,120,36)
-dpd = st.sidebar.number_input('Avg DPD',0,100,20)
-delinq = st.sidebar.number_input('Delinquency %',0,100,30)
-util = st.sidebar.number_input('Utilization %',0,100,30)
-accounts = st.sidebar.number_input('Accounts',1,10,2)
+age = st.sidebar.number_input(
+    'Age ℹ',18,100,28,
+    help="Applicant's age. Middle age is generally considered financially stable."
+)
 
-residence = st.sidebar.selectbox('Residence',['Owned','Rented','Mortgage'])
-purpose = st.sidebar.selectbox('Purpose',['Education','Home','Auto','Personal'])
-loan_type = st.sidebar.selectbox('Loan Type',['Unsecured','Secured'])
+income = st.sidebar.number_input(
+    'Income ℹ',0,10000000,1200000,
+    help="Annual income. Higher income improves repayment ability."
+)
 
+loan_amount = st.sidebar.number_input(
+    'Loan Amount ℹ',0,10000000,2560000,
+    help="Total loan requested. Higher loan = higher risk."
+)
+
+loan_tenure = st.sidebar.number_input(
+    'Loan Tenure ℹ',1,120,36,
+    help="Loan duration in months. Longer tenure lowers EMI but increases total exposure."
+)
+
+dpd = st.sidebar.number_input(
+    'Avg DPD ℹ',0,100,20,
+    help="Average days past due. Higher values indicate delayed payments."
+)
+
+delinq = st.sidebar.number_input(
+    'Delinquency % ℹ',0,100,30,
+    help="Percentage of missed payments. High value = risky borrower."
+)
+
+util = st.sidebar.number_input(
+    'Utilization % ℹ',0,100,30,
+    help="Credit usage ratio. High utilization signals financial stress."
+)
+
+accounts = st.sidebar.number_input(
+    'Accounts ℹ',1,10,2,
+    help="Number of active credit accounts."
+)
+
+residence = st.sidebar.selectbox(
+    'Residence ℹ',['Owned','Rented','Mortgage'],
+    help="Owned homes indicate financial stability."
+)
+
+purpose = st.sidebar.selectbox(
+    'Purpose ℹ',['Education','Home','Auto','Personal'],
+    help="Loan purpose affects risk profile."
+)
+
+loan_type = st.sidebar.selectbox(
+    'Loan Type ℹ',['Unsecured','Secured'],
+    help="Secured loans are less risky than unsecured loans."
+)
 # ---------------- CHART THEME ---------------- #
 def apply_dark_chart(fig):
     fig.update_layout(
@@ -110,7 +154,7 @@ if page == "Dashboard":
     st.plotly_chart(apply_dark_chart(fig), use_container_width=True)
 
 # =====================================================
-# RISK ENGINE (POWER BI STYLE)
+# RISK ENGINE
 # =====================================================
 if page == "Risk":
 
@@ -130,22 +174,18 @@ if page == "Risk":
             "loan_type":loan_type
         }
 
-        # 🔥 LOADING SPINNER ADDED HERE
         with st.spinner("Analyzing risk..."):
             prob,score,rating = predict_risk(data)
 
-        # FILTERS
         f1,f2,f3 = st.columns(3)
         f1.selectbox("Purpose Filter",["All","Education","Home","Auto","Personal"])
         f2.selectbox("Residence Filter",["All","Owned","Rented","Mortgage"])
         f3.selectbox("Risk Band",["Low","Medium","High"])
 
-        # SHAP
         df_input = prepare_input(data)
         shap_vals = get_shap_values(df_input)
         imp = get_feature_importance(shap_vals,df_input.columns)
 
-        # TABS
         tabs = st.tabs(["Overview","Risk Analysis","Explainability","Actions"])
 
         with tabs[0]:
@@ -195,7 +235,6 @@ if page == "Risk":
             else:
                 st.error("Reject Application")
 
-        # REPORT
         excel = BytesIO()
         wb = xlsxwriter.Workbook(excel, {'in_memory': True})
         ws = wb.add_worksheet("Summary")
@@ -246,3 +285,45 @@ if page == "Simulator":
                  color_discrete_sequence=["#22C55E","#EF4444"])
 
     st.plotly_chart(apply_dark_chart(fig), use_container_width=True)
+
+# =====================================================
+# DATA GUIDE
+# =====================================================
+if page == "Guide":
+
+    st.markdown("## Input Data Guide")
+
+    st.markdown("This section helps non-financial users understand each input.")
+
+    with st.expander("Age"):
+        st.write("Age affects financial stability and credit history.")
+
+    with st.expander("Income"):
+        st.write("Higher income means better repayment ability.")
+
+    with st.expander("Loan Amount"):
+        st.write("Higher loans increase financial burden.")
+
+    with st.expander("Loan Tenure"):
+        st.write("Long tenure reduces EMI but increases total risk duration.")
+
+    with st.expander("Avg DPD"):
+        st.write("Days past due indicates payment delays.")
+
+    with st.expander("Delinquency %"):
+        st.write("Percentage of missed payments.")
+
+    with st.expander("Utilization %"):
+        st.write("How much credit is being used.")
+
+    with st.expander("Accounts"):
+        st.write("Number of active credit accounts.")
+
+    with st.expander("Residence"):
+        st.write("Owned homes show stability.")
+
+    with st.expander("Purpose"):
+        st.write("Loan purpose impacts risk.")
+
+    with st.expander("Loan Type"):
+        st.write("Secured loans are safer than unsecured.")
