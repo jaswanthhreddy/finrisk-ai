@@ -151,24 +151,108 @@ if page == "Dashboard":
 
     st.markdown("## Overview")
 
-    c1,c2,c3 = st.columns(3)
+    # ---------------- KPI ROW ---------------- #
+    k1, k2, k3 = st.columns(3)
 
-    c1.markdown("<div class='kpi'><h4>Applications</h4><h2>1248</h2></div>",unsafe_allow_html=True)
-    c2.markdown("<div class='kpi'><h4>Approval Rate</h4><h2>68%</h2></div>",unsafe_allow_html=True)
-    c3.markdown("<div class='kpi'><h4>Defaults</h4><h2>2.8%</h2></div>",unsafe_allow_html=True)
+    with k1:
+        st.markdown("""
+        <div class='kpi'>
+        📊 <b>Applications</b>
+        <h2>1248</h2>
+        </div>
+        """, unsafe_allow_html=True)
 
-    df = pd.DataFrame({
-        "Month":["Jan","Feb","Mar","Apr","May"],
-        "Approvals":[50,60,70,65,80],
-        "Defaults":[5,10,8,12,9]
+    with k2:
+        st.markdown("""
+        <div class='kpi'>
+        ✅ <b>Approval Rate</b>
+        <h2>68%</h2>
+        </div>
+        """, unsafe_allow_html=True)
+
+    with k3:
+        st.markdown("""
+        <div class='kpi'>
+        ⚠ <b>Defaults</b>
+        <h2>2.8%</h2>
+        </div>
+        """, unsafe_allow_html=True)
+
+    # ---------------- MAIN GRID ---------------- #
+    col_left, col_right = st.columns([3,1])
+
+    # -------- LEFT: MAIN TREND -------- #
+    with col_left:
+        st.markdown("<div class='section'>", unsafe_allow_html=True)
+        st.subheader("Trend Analysis")
+
+        df = pd.DataFrame({
+            "Month":["Jan","Feb","Mar","Apr","May"],
+            "Approvals":[50,60,70,65,80],
+            "Defaults":[5,10,8,12,9]
+        })
+
+        fig = go.Figure()
+        fig.add_trace(go.Scatter(
+            x=df["Month"], y=df["Approvals"],
+            mode='lines+markers',
+            line=dict(color="#22C55E", width=3),
+            name="Approvals"
+        ))
+
+        fig.add_trace(go.Scatter(
+            x=df["Month"], y=df["Defaults"],
+            mode='lines+markers',
+            line=dict(color="#EF4444", width=3),
+            name="Defaults"
+        ))
+
+        fig.update_layout(
+            legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1)
+        )
+
+        st.plotly_chart(apply_dark_chart(fig), use_container_width=True)
+
+        st.markdown("</div>", unsafe_allow_html=True)
+
+    # -------- RIGHT: INSIGHTS PANEL -------- #
+    with col_right:
+        st.markdown("<div class='section'>", unsafe_allow_html=True)
+        st.subheader("Insights")
+
+        st.success("Approval rate improving steadily")
+        st.warning("Defaults slightly increased in April")
+        st.info("Overall portfolio performance stable")
+
+        st.markdown("---")
+        st.subheader("Quick Metrics")
+
+        st.metric("Portfolio Risk", "Medium")
+        st.metric("Growth", "+12%")
+        st.metric("Stability", "Good")
+
+        st.markdown("</div>", unsafe_allow_html=True)
+
+    # ---------------- SECOND ROW ---------------- #
+    st.markdown("<div class='section'>", unsafe_allow_html=True)
+    st.subheader("Portfolio Distribution")
+
+    dist_data = pd.DataFrame({
+        "Category":["Low Risk","Medium Risk","High Risk"],
+        "Count":[520,480,248]
     })
 
-    fig = go.Figure()
-    fig.add_trace(go.Scatter(x=df["Month"], y=df["Approvals"], mode='lines+markers', line=dict(color="#22C55E")))
-    fig.add_trace(go.Scatter(x=df["Month"], y=df["Defaults"], mode='lines+markers', line=dict(color="#EF4444")))
+    fig2 = px.pie(
+        dist_data,
+        names="Category",
+        values="Count",
+        hole=0.5,
+        color_discrete_sequence=["#22C55E","#FACC15","#EF4444"]
+    )
 
-    st.plotly_chart(apply_dark_chart(fig), use_container_width=True)
+    st.plotly_chart(apply_dark_chart(fig2), use_container_width=True)
 
+    st.markdown("</div>", unsafe_allow_html=True)
 # =====================================================
 # RISK ENGINE
 # =====================================================
