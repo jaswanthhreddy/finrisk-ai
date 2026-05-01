@@ -130,34 +130,158 @@ User Input → Feature Engineering → ML Model → Decision Engine → Dashboar
 
 ---
 
-## Input Data Description
+## Input Data Description (Simple Explanation for Everyone)
 
-### Demographics
-
-* Age
-* Residence Type
-
-### Financial
-
-* Income
-* Loan Amount
-* Loan Tenure
-
-### Behavioral
-
-* Average DPD
-* Delinquency Ratio
-* Credit Utilization
-* Number of Open Accounts
-
-### Loan Context
-
-* Loan Type
-* Loan Purpose
-
-These reflect real-world banking risk signals.
+This section explains each input field in simple terms so even someone without financial knowledge can understand how risk is evaluated.
 
 ---
+
+### 1. Age
+
+Represents the applicant’s age in years.
+
+Why it matters:
+- Very young applicants may have limited financial history
+- Very old applicants may have repayment risks depending on income stability
+- Middle age is generally considered stable
+
+---
+
+### 2. Income
+
+Monthly income of the applicant.
+
+Why it matters:
+- Higher income → better repayment ability
+- Lower income → higher risk
+
+Example:
+If income is ₹1,20,000/month, the person can handle higher EMIs safely.
+
+---
+
+### 3. Loan Amount
+
+Total amount the applicant wants to borrow.
+
+Why it matters:
+- Larger loans increase financial burden
+- Smaller loans are easier to repay
+
+---
+
+### 4. Loan Tenure (Months)
+
+Duration of the loan in months.
+
+Why it matters:
+- Longer tenure → lower monthly EMI but longer commitment
+- Shorter tenure → higher EMI but faster repayment
+
+---
+
+### 5. Avg DPD (Days Past Due)
+
+Average number of days the applicant delayed payments in the past.
+
+Why it matters:
+- Indicates repayment discipline
+- Higher DPD = poor repayment behavior
+
+Example:
+- 0–5 days → Good
+- 20+ days → Risky
+
+---
+
+### 6. Delinquency Ratio (%)
+
+Percentage of past payments that were delayed.
+
+Why it matters:
+- Shows how often the applicant misses payments
+- Higher percentage = frequent payment issues
+
+Example:
+- 5% → Very good
+- 30% → Risky borrower
+
+---
+
+### 7. Credit Utilization (%)
+
+How much of available credit the applicant is currently using.
+
+Formula:
+Used Credit / Total Credit Limit
+
+Why it matters:
+- High utilization means financial stress
+
+Example:
+- 30% → Healthy
+- 80% → High risk
+
+---
+
+### 8. Number of Open Accounts
+
+Total active loans or credit accounts.
+
+Why it matters:
+- Too many loans → higher financial burden
+- Too few → limited credit history
+
+---
+
+### 9. Residence Type
+
+Type of housing:
+- Owned
+- Rented
+
+Why it matters:
+- Owned house → more financial stability
+- Rented → slightly higher uncertainty
+
+---
+
+### 10. Loan Purpose
+
+Reason for taking the loan.
+
+Examples:
+- Education
+- Personal
+- Home
+
+Why it matters:
+- Some purposes are considered safer (e.g., education, home)
+- Others (personal loans) may be riskier
+
+---
+
+### 11. Loan Type
+
+Type of loan:
+- Secured (backed by asset)
+- Unsecured (no collateral)
+
+Why it matters:
+- Secured loans → lower risk (bank can recover asset)
+- Unsecured loans → higher risk
+
+---
+
+## Summary
+
+All these inputs together help the system understand:
+
+- Can the person repay the loan?
+- How risky is the applicant?
+- Should the loan be approved?
+
+These are the same types of signals used in real banking systems.
 
 ## Feature Engineering
 
