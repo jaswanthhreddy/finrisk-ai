@@ -65,57 +65,57 @@ page = st.session_state.page
 st.sidebar.header("Applicant Details")
 
 age = st.sidebar.number_input(
-    'Age ℹ',18,100,28,
+    'Age',18,100,28,
     help="Applicant's age. Middle age is generally considered financially stable."
 )
 
 income = st.sidebar.number_input(
-    'Income ℹ',0,10000000,1200000,
+    'Income',0,10000000,1200000,
     help="Annual income. Higher income improves repayment ability."
 )
 
 loan_amount = st.sidebar.number_input(
-    'Loan Amount ℹ',0,10000000,2560000,
+    'Loan Amount',0,10000000,2560000,
     help="Total loan requested. Higher loan = higher risk."
 )
 
 loan_tenure = st.sidebar.number_input(
-    'Loan Tenure ℹ',1,120,36,
+    'Loan Tenure',1,120,36,
     help="Loan duration in months. Longer tenure lowers EMI but increases total exposure."
 )
 
 dpd = st.sidebar.number_input(
-    'Avg DPD ℹ',0,100,20,
+    'Avg DPD',0,100,20,
     help="Average days past due. Higher values indicate delayed payments."
 )
 
 delinq = st.sidebar.number_input(
-    'Delinquency % ℹ',0,100,30,
+    'Delinquency %',0,100,30,
     help="Percentage of missed payments. High value = risky borrower."
 )
 
 util = st.sidebar.number_input(
-    'Utilization % ℹ',0,100,30,
+    'Utilization %',0,100,30,
     help="Credit usage ratio. High utilization signals financial stress."
 )
 
 accounts = st.sidebar.number_input(
-    'Accounts ℹ',1,10,2,
+    'Accounts',1,10,2,
     help="Number of active credit accounts."
 )
 
 residence = st.sidebar.selectbox(
-    'Residence ℹ',['Owned','Rented','Mortgage'],
+    'Residence',['Owned','Rented','Mortgage'],
     help="Owned homes indicate financial stability."
 )
 
 purpose = st.sidebar.selectbox(
-    'Purpose ℹ',['Education','Home','Auto','Personal'],
+    'Purpose',['Education','Home','Auto','Personal'],
     help="Loan purpose affects risk profile."
 )
 
 loan_type = st.sidebar.selectbox(
-    'Loan Type ℹ',['Unsecured','Secured'],
+    'Loan Type',['Unsecured','Secured'],
     help="Secured loans are less risky than unsecured loans."
 )
 # ---------------- CHART THEME ---------------- #
